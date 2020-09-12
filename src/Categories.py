@@ -81,11 +81,16 @@ def generatePieSpend():
     
     for i in range(len(labels)):
         explode.append(0)
-    plt.pie(sizes, explode, labels, autopct='%1.2f%%', labeldistance=1.34)
+    plt.pie(sizes, explode, None, autopct='%1.2f%%', labeldistance=.7)
+    
 
     plt.axis('equal')
     st.header('Your Spending Chart')
+    plt.legend(labels, bbox_to_anchor=(1., 1.02, 1., .412), 
+           ncol=2, mode="expand", borderaxespad=0.)
+    
     st.pyplot()
+    
 
 
     
