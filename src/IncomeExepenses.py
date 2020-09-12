@@ -1,40 +1,40 @@
-import streamlit as stl
+import streamlit as st
 
-stl.sidebar.title("Monthly Budget Analyzer")
+st.sidebar.title("Monthly Budget Analyzer")
 
-stl.sidebar.header("Income")
+st.sidebar.header("Income")
 incomeStr = 'Estimated Income'
-income = stl.sidebar.number_input(incomeStr)
+income = st.sidebar.number_input(incomeStr)
 
-stl.sidebar.header("Estimated expenses")
+st.sidebar.header("Estimated expenses")
 
 
 transportationStr = 'Transportation'
-transportation = stl.sidebar.number_input(transportationStr)
+transportation = st.sidebar.number_input(transportationStr)
 
 homeStr = 'Home & Utilities'
-home = stl.sidebar.number_input(homeStr)
+home = st.sidebar.number_input(homeStr)
 
 groceriesStr = 'Groceries'
-groceries = stl.sidebar.number_input(groceriesStr)
+groceries = st.sidebar.number_input(groceriesStr)
 
 personalStr = 'Personal & Family Care'
-personal  = stl.sidebar.number_input(personalStr)
+personal  = st.sidebar.number_input(personalStr)
 
 healthStr = 'Health'
-health = stl.sidebar.number_input(healthStr)
+health = st.sidebar.number_input(healthStr)
 
 diningStr = 'Restaurants & Dining'
-dining = stl.sidebar.number_input(diningStr)
+dining = st.sidebar.number_input(diningStr)
 
 shoppingStr = 'Shopping & Entertainment'
-shopping = stl.sidebar.number_input(shoppingStr)
+shopping = st.sidebar.number_input(shoppingStr)
 
 savingsStr = 'Savings & Investments'
-savings = stl.sidebar.number_input(savingsStr)
+savings = st.sidebar.number_input(savingsStr)
 
 otherStr = 'Other and Miscellaneous'
-other = stl.sidebar.number_input(otherStr)
+other = st.sidebar.number_input(otherStr)
 
 
 
