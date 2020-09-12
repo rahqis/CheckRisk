@@ -1,7 +1,6 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import importlib
-import Charts
 
 class Category:
     def __init__(self, name, cost):
@@ -9,6 +8,7 @@ class Category:
         self.cost = cost
 
 catergories = []
+
 def runSide():
     
     st.sidebar.title("Monthly Budget Analyzer")
@@ -66,6 +66,7 @@ def runSide():
     other = st.sidebar.number_input(otherStr)
     misc = Category(otherStr, other)
     catergories.append(misc)
+
     
 runSide()
 
@@ -89,5 +90,29 @@ def generatePieSpend():
     st.header('Your Spending Chart')
     st.pyplot()
 
+def generateBarSpend():
+    labels = []
+    sizes = []
+    colors = []
+    explode = []
+    
+    
+    for c in catergories:
+        if (c.cost > 0):
+            labels.append(c.name)
+            sizes.append(c.cost)
+    
+    for i in range(len(labels)):
+        explode.append(0)
+    plt.bar(labels, sizes, width=0.2, align='center')
+    plt.xlabel("Categories");
+    plt.ylabel("Spending");
+
+    st.pyplot()
+
 if st.sidebar.button("View Spending Chart"):
     generatePieSpend()
+    generateBarSpend()
+    
+
+
