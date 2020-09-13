@@ -12,6 +12,6 @@ The targetting audience is for anyone who is looking for better ways to manage m
 * matplotlib
 
 ## Deployment
-For deployment, clone the repository in your terminal and type "streamlit run src/Categories.py". A local host server will appear in your default browser. 
+For deployment, clone the repository in your terminal and type "streamlit run src/app.py". A local host server will appear in your default browser. 
   
 
