@@ -1,5 +1,4 @@
 import streamlit as st
-import heroku
 import streamlit.components.v1 as components
 import matplotlib.pyplot as plt
 
@@ -188,7 +187,7 @@ def saveGoals():
                     Remainder = Remainder - sizes[i]
     
     equals = 0
-    if Remainder > 0:
+    if Remainder > 0 and len(nonessential)>0:
         equals = Remainder / len(nonessential)
         for i in range(len(sizes)):
                 if sizes[i] == 0:
@@ -200,7 +199,6 @@ def saveGoals():
     plt.pie(sizes, explode, None, autopct='%1.2f%%', labeldistance=.7)
     
     plt.axis('equal')
-    st.header('Congratulations on your new budget plan!')
     plt.legend(labels, bbox_to_anchor=(1., 1.02, 1., .412), 
            ncol=2, mode="expand", borderaxespad=0.)
     
@@ -222,6 +220,8 @@ if st.sidebar.button("View Spending"):
         leftOver()
         #generateBarSpend()
         highExepense()
-
 saveGoals()
+if (fixed != None):
+    st.header('Congratulations on your new budget plan!')
+
 
