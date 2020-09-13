@@ -1,14 +1,26 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+<<<<<<< HEAD
+=======
+import importlib
+>>>>>>> ace41310237d70d1e98d0d65a932caa255b6d630
 
 class Category:
     def __init__(self, name, cost):
         self.name = name
         self.cost = cost
 
+<<<<<<< HEAD
 categories = []
 
 st.sidebar.title("Monthly Budget Analyzer")
+=======
+catergories = []
+
+def runSide():
+    
+    st.sidebar.title("Monthly Budget Analyzer")
+>>>>>>> ace41310237d70d1e98d0d65a932caa255b6d630
 
 st.sidebar.header("Income")
 
@@ -59,6 +71,7 @@ savings = st.sidebar.number_input(savingsStr, value=0.00)
 save = Category(savingsStr, savings)
 categories.append(save)
 
+<<<<<<< HEAD
 otherStr = 'Other and Miscellaneous'
 other = st.sidebar.number_input(otherStr, value=0.00)
 misc = Category(otherStr, other)
@@ -69,6 +82,13 @@ for c in categories:
     totalExpenses = totalExpenses + c.cost
 
     
+=======
+    otherStr = 'Other and Miscellaneous'
+    other = st.sidebar.number_input(otherStr)
+    misc = Category(otherStr, other)
+    catergories.append(misc)
+
+>>>>>>> ace41310237d70d1e98d0d65a932caa255b6d630
     
 
 
@@ -110,6 +130,7 @@ def generateBarSpend():
     plt.xlabel("Categories");
     plt.ylabel("Spending");
 
+<<<<<<< HEAD
     st.pyplot()
     
 def highExepense():
@@ -159,3 +180,31 @@ if st.sidebar.button("View Spending"):
     saveGoals()
 except:
     pass  
+=======
+def generateBarSpend():
+    labels = []
+    sizes = []
+    colors = []
+    explode = []
+    
+    
+    for c in catergories:
+        if (c.cost > 0):
+            labels.append(c.name)
+            sizes.append(c.cost)
+    
+    for i in range(len(labels)):
+        explode.append(0)
+    plt.bar(labels, sizes, width=0.2, align='center')
+    plt.xlabel("Categories");
+    plt.ylabel("Spending");
+
+    st.pyplot()
+
+if st.sidebar.button("View Spending Chart"):
+    generatePieSpend()
+    generateBarSpend()
+    
+
+
+>>>>>>> ace41310237d70d1e98d0d65a932caa255b6d630
