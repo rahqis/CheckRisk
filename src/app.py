@@ -115,6 +115,7 @@ def generateBarSpend():
     plt.ylabel("Spending");
 
     st.pyplot()
+fixed = []
     
 def highExepense():
     highestExpense = categories[0]
@@ -223,6 +224,14 @@ if st.sidebar.button("View Spending"):
         highExepense()
 saveGoals()
 if (fixed != None):
-    st.header('Congratulations on your new budget plan!')
+    st.subheader('Congratulations on your new budget plan!')
+    
 
 
+st.subheader('More Resources')
+st.write('Helpful better spending and saving habits')
+st.write('https://www.nerdwallet.com/blog/finance/dont-shop-this-way/')
+st.write('https://www.blackwallet.org/the-urban-millenials-guide-forming-responsible-spending-habits/')
+st.write('https://www.savethestudent.org/shopping/student-discounts-cards-guide.html')
+
+st.write('More About us: ', 'https://oliviawxo29.wixsite.com/mysite')
