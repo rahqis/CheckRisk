@@ -7,7 +7,6 @@ class Category:
     def __init__(self, name, cost):
         self.name = name
         self.cost = cost
-
 categories = []
 st.header('Financial Health')
 st.subheader('Create a secure tomorrow today')
