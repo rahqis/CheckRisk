@@ -1,26 +1,18 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import matplotlib.pyplot as plt
-<<<<<<< HEAD
-=======
-import importlib
->>>>>>> ace41310237d70d1e98d0d65a932caa255b6d630
 
 class Category:
     def __init__(self, name, cost):
         self.name = name
         self.cost = cost
 
-<<<<<<< HEAD
 categories = []
-
+st.header('Financial Health')
+st.subheader('Create a secure tomorrow today')
+fhHelper = st.write('To start, take the monthly budget analyzer in the side bar.') 
+fhHelper1 = st.write('We\'ll wait for you back here with your results!')         
 st.sidebar.title("Monthly Budget Analyzer")
-=======
-catergories = []
-
-def runSide():
-    
-    st.sidebar.title("Monthly Budget Analyzer")
->>>>>>> ace41310237d70d1e98d0d65a932caa255b6d630
 
 st.sidebar.header("Income")
 
@@ -71,7 +63,6 @@ savings = st.sidebar.number_input(savingsStr, value=0.00)
 save = Category(savingsStr, savings)
 categories.append(save)
 
-<<<<<<< HEAD
 otherStr = 'Other and Miscellaneous'
 other = st.sidebar.number_input(otherStr, value=0.00)
 misc = Category(otherStr, other)
@@ -81,14 +72,8 @@ totalExpenses = 0.00
 for c in categories:
     totalExpenses = totalExpenses + c.cost
 
-    
-=======
-    otherStr = 'Other and Miscellaneous'
-    other = st.sidebar.number_input(otherStr)
-    misc = Category(otherStr, other)
-    catergories.append(misc)
 
->>>>>>> ace41310237d70d1e98d0d65a932caa255b6d630
+
     
 
 
@@ -107,7 +92,6 @@ def generatePieSpend():
         explode.append(0)
     plt.pie(sizes, explode, None, autopct='%1.2f%%', labeldistance=.7)
     
-
     plt.axis('equal')
     st.header('Your Spending Chart')
     plt.legend(labels, bbox_to_anchor=(1., 1.02, 1., .412), 
@@ -130,7 +114,6 @@ def generateBarSpend():
     plt.xlabel("Categories");
     plt.ylabel("Spending");
 
-<<<<<<< HEAD
     st.pyplot()
     
 def highExepense():
@@ -163,48 +146,82 @@ def highExepense():
 
 def leftOver():
     leftOver = inc.cost - totalExpenses
+    savePer = save.cost / inc.cost * 100
+    sp = 0
     lo = '{:.2f}'.format(leftOver)
     st.subheader('Left Over After Expense: $' + lo)
-        
-def saveGoals():
-    savePer = save.cost / inc.cost * 100
-    st.subheader('How much of your income would you like to save?')    
-    st.write('Current Savings Percentage: ', '{:.2f}'.format(savePer), '%')
-    saveGoal = st.slider('Monthly Saving Goal', 0, 100, value=int(savePer)) 
+    st.subheader('Current Savings Percentage: ' + '{:.2f}'.format(savePer) + '%')
 
-if st.sidebar.button("View Spending"):
-    st.cache(generatePieSpend(), persist=True)
-    st.cache(leftOver(), True)
-    #generateBarSpend()
-    st.cache(highExepense(), True)
-    saveGoals()
-except:
-    pass  
-=======
-def generateBarSpend():
+    
+def saveGoals():
+    st.header("Saving Goals")
+    st.subheader('How much of your income would you like to save?')    
+    saveGoal = st.slider('Monthly Saving Goal', 0, 100)
+    fixed = st.multiselect('Which of your incomes are fixed and essential?',
+                 (trans.name, homeutil.name, groc.name, pers.name, heal.name))
+    Remainder = 100
     labels = []
     sizes = []
-    colors = []
     explode = []
     
+    nonessential =[]
     
-    for c in catergories:
+    for c in categories:
         if (c.cost > 0):
             labels.append(c.name)
-            sizes.append(c.cost)
+            sizes.append(0)
+            
+    for n in labels:
+        if n not in fixed:
+            nonessential.append(n)
+    
+    for i in range(len(labels)): 
+        if (labels[i]==savingsStr):
+            sizes[i] = saveGoal
+            Remainder = Remainder - saveGoal
     
     for i in range(len(labels)):
-        explode.append(0)
-    plt.bar(labels, sizes, width=0.2, align='center')
-    plt.xlabel("Categories");
-    plt.ylabel("Spending");
-
-    st.pyplot()
-
-if st.sidebar.button("View Spending Chart"):
-    generatePieSpend()
-    generateBarSpend()
+       if labels[i] in fixed:
+           for c in categories:
+               if labels[i] == c.name:
+                    sizes[i] = int(c.cost / inc.cost * 100)
+                    Remainder = Remainder - sizes[i]
+    
+    equals = 0
+    if Remainder > 0:
+        equals = Remainder / len(nonessential)
+        for i in range(len(sizes)):
+                if sizes[i] == 0:
+                    sizes[i] = equals
     
 
+    for i in range(len(sizes)):
+        explode.append(0)
+    plt.pie(sizes, explode, None, autopct='%1.2f%%', labeldistance=.7)
+    
+    plt.axis('equal')
+    st.header('Congratulations on your new budget plan!')
+    plt.legend(labels, bbox_to_anchor=(1., 1.02, 1., .412), 
+           ncol=2, mode="expand", borderaxespad=0.)
+    
+    st.pyplot()
+    
+    
+    
+def resources():
+    st.header('Further resources to guide you on your journey!')
+    st.subheader('')
+    components.html('''
+                    
+                    ''')
 
->>>>>>> ace41310237d70d1e98d0d65a932caa255b6d630
+if st.sidebar.button("View Spending"):
+        fhHelper = st.write('Welcome back! Let\'s take a look at your results.')
+        fhHelper1 = st.write('')
+        generatePieSpend()
+        leftOver()
+        #generateBarSpend()
+        highExepense()
+
+saveGoals()
+
