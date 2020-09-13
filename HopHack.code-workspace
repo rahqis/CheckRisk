@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "pythonProject",
+			"path": ".."
+		},
+		{
+			"name": "RiskCheck",
+			"path": "../../RiskCheck"
+		},
+		{
+			"name": "venv",
+			"path": "../../venv"
+		}
+	],
+	"settings": {
+		"python.pythonPath": "/System/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python",
+		"liveServer.settings.multiRootWorkspaceName": "pythonProject",
+		"git.ignoreLimitWarning": true
+	}
+}
