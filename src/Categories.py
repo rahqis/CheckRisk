@@ -6,75 +6,79 @@ class Category:
         self.name = name
         self.cost = cost
 
-catergories = []
-def runSide():
+categories = []
+
+st.sidebar.title("Monthly Budget Analyzer")
+
+st.sidebar.header("Income")
+
+incomeStr = 'Estimated Income'
+income = st.sidebar.number_input(incomeStr, value=0.00)
+inc = Category(incomeStr, income)
+
+st.sidebar.header("Estimated expenses")
+
+
+transportationStr = 'Transportation'
+transportation = st.sidebar.number_input(transportationStr, value=0.00)
+trans = Category(transportationStr, transportation)
+categories.append(trans)
+
+homeStr = 'Home & Utilities'
+home = st.sidebar.number_input(homeStr, value=0.00)
+homeutil = Category(homeStr, home)
+categories.append(homeutil)
+
+groceriesStr = 'Groceries'
+groceries = st.sidebar.number_input(groceriesStr, value=0.00)
+groc = Category(groceriesStr, groceries)
+categories.append(groc)
+
+personalStr = 'Personal & Family Care'
+personal  = st.sidebar.number_input(personalStr, value=0.00)
+pers = Category(personalStr, personal)
+categories.append(pers)
+
+healthStr = 'Health'
+health = st.sidebar.number_input(healthStr, value=0.00)
+heal = Category(healthStr, health)
+categories.append(heal)
+
+diningStr = 'Restaurants & Dining'
+dining = st.sidebar.number_input(diningStr, value=0.00)
+dine = Category(diningStr, dining)
+categories.append(dine)
+
+shoppingStr = 'Shopping & Entertainment'
+shopping = st.sidebar.number_input(shoppingStr, value=0.00)
+shop = Category(shoppingStr, shopping)
+categories.append(shop)
+
+savingsStr = 'Savings & Investments'
+savings = st.sidebar.number_input(savingsStr, value=0.00)
+save = Category(savingsStr, savings)
+categories.append(save)
+
+otherStr = 'Other and Miscellaneous'
+other = st.sidebar.number_input(otherStr, value=0.00)
+misc = Category(otherStr, other)
+categories.append(misc)
     
-    st.sidebar.title("Monthly Budget Analyzer")
+totalExpenses = 0.00
+for c in categories:
+    totalExpenses = totalExpenses + c.cost
 
-    st.sidebar.header("Income")
-
-    incomeStr = 'Estimated Income'
-    income = st.sidebar.number_input(incomeStr, value=0.00)
-    inc = Category(incomeStr, income)
-
-    st.sidebar.header("Estimated expenses")
-
-
-    transportationStr = 'Transportation'
-    transportation = st.sidebar.number_input(transportationStr, value=0.00)
-    trans = Category(transportationStr, transportation)
-    catergories.append(trans)
-
-    homeStr = 'Home & Utilities'
-    home = st.sidebar.number_input(homeStr, value=0.00)
-    homeutil = Category(homeStr, home)
-    catergories.append(homeutil)
-
-    groceriesStr = 'Groceries'
-    groceries = st.sidebar.number_input(groceriesStr, value=0.00)
-    groc = Category(groceriesStr, groceries)
-    catergories.append(groc)
-
-    personalStr = 'Personal & Family Care'
-    personal  = st.sidebar.number_input(personalStr, value=0.00)
-    pers = Category(personalStr, personal)
-    catergories.append(pers)
-
-    healthStr = 'Health'
-    health = st.sidebar.number_input(healthStr, value=0.00)
-    heal = Category(healthStr, health)
-    catergories.append(heal)
-
-    diningStr = 'Restaurants & Dining'
-    dining = st.sidebar.number_input(diningStr, value=0.00)
-    dine = Category(diningStr, dining)
-    catergories.append(dine)
-
-    shoppingStr = 'Shopping & Entertainment'
-    shopping = st.sidebar.number_input(shoppingStr, value=0.00)
-    shop = Category(shoppingStr, shopping)
-    catergories.append(shop)
-
-    savingsStr = 'Savings & Investments'
-    savings = st.sidebar.number_input(savingsStr, value=0.00)
-    save = Category(savingsStr, savings)
-    catergories.append(save)
-
-    otherStr = 'Other and Miscellaneous'
-    other = st.sidebar.number_input(otherStr, value=0.00)
-    misc = Category(otherStr, other)
-    catergories.append(misc)
     
-runSide()
+    
+
 
 def generatePieSpend():
     labels = []
     sizes = []
-    colors = []
     explode = []
     
     
-    for c in catergories:
+    for c in categories:
         if (c.cost > 0):
             labels.append(c.name)
             sizes.append(c.cost)
@@ -92,33 +96,66 @@ def generatePieSpend():
     st.pyplot()
     
 
+def generateBarSpend():
+    labels = []
+    sizes = []    
+    
+    for c in categories:
+        if (c.cost > 0):
+            labels.append(c.name)
+            sizes.append(c.cost)
+    
+    plt.bar(labels, sizes, width=0.8, align='center')
+    plt.xticks(rotation=90)
+    plt.xlabel("Categories");
+    plt.ylabel("Spending");
 
+    st.pyplot()
     
 def highExepense():
-    highestExpense = catergories[0]
-    highest2Expense = catergories[1]
-    highest3Expense = catergories[2]
+    highestExpense = categories[0]
+    highest2Expense = categories[1]
+    highest3Expense = categories[2]
 
-    for c in catergories:
+    for c in categories:
         if(highestExpense.cost<c.cost):
             highestExpense = c
         if(highest2Expense == highestExpense):
-            highest2Expense = catergories[0]
-    for c in catergories:
+            highest2Expense = categories[0]
+    for c in categories:
         if(highest2Expense.cost<highestExpense.cost and highest2Expense.cost<c.cost and c != highestExpense):
             highest2Expense = c
-    for c in catergories:
+        if (highest2Expense == highest3Expense):
+            highest3Expense = categories[1]
+        if (highest3Expense == highestExpense):
+            highest3Expense = categories[0]
+    for c in categories:
         if(highest3Expense.cost<=highest2Expense.cost and highest3Expense.cost<c.cost and (c != highest2Expense and c != highestExpense)):
             highest3Expense = c
     
     highestExpenses = [highestExpense, highest2Expense, highest3Expense]
     
     st.subheader('Top 3 Expenses')
-    for h  in highestExpenses:
+    for h in highestExpenses:
         st.write(h.name)
-        st.write('{:06.2f}'.format(h.cost))
+        st.write('$', '{:.2f}'.format(h.cost)) 
 
-if st.sidebar.button("View Spending Chart"):
-    generatePieSpend()
-    highExepense()    
+def leftOver():
+    leftOver = inc.cost - totalExpenses
+    lo = '{:.2f}'.format(leftOver)
+    st.subheader('Left Over After Expense: $' + lo)
+        
+def saveGoals():
+    savePer = save.cost / inc.cost * 100
+    st.subheader('How much of your income would you like to save?')    
+    st.write('Current Savings Percentage: ', '{:.2f}'.format(savePer), '%')
+    saveGoal = st.slider('Monthly Saving Goal', 0, 100, value=int(savePer)) 
 
+if st.sidebar.button("View Spending"):
+    st.cache(generatePieSpend(), persist=True)
+    st.cache(leftOver(), True)
+    #generateBarSpend()
+    st.cache(highExepense(), True)
+    saveGoals()
+except:
+    pass  
