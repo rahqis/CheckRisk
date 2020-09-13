@@ -1,16 +1,16 @@
 {
 	"folders": [
 		{
-			"name": "venv",
-			"path": "../../venv"
+			"name": "pythonProject",
+			"path": ".."
 		},
 		{
 			"name": "RiskCheck",
 			"path": "../../RiskCheck"
 		},
 		{
-			"name": "pythonProject",
-			"path": ".."
+			"name": "venv",
+			"path": "../../venv"
 		}
 	],
 	"settings": {
