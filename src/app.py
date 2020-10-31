@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import matplotlib.pyplot as plt
-
+# Full repository available at rahqis/CheckRisk on github
 #Originally category.py 
 class Category:
     def __init__(self, name, cost):
